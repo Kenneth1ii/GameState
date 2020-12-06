@@ -37,7 +37,7 @@ const placeCharacter = () => {
         if (held_direction === directions.up) {y-=speed;}
         character.setAttribute("facing", held_direction);  // set html attribute facing="right."
     }
-    character.setAttribute("walking", held_direction ? "true": "false"); 
+    character.setAttribute("walking", held_direction ? "true" : "false"); 
     //if statement for walking attribute html characters.
 
     var camera_left = pixelSize * 66;

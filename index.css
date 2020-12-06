@@ -104,7 +104,7 @@ the image is being shifted UP.
     background-position-y: calc(var(--pixel-size)*-96);
 }
 
-.character[walking="true"] .character-spritesheet {
+.character[walking="true"] .character-spritesheet{
     animation: walkingAnimation 0.6s steps(4) infinite;
 }
 /*
@@ -119,12 +119,12 @@ the image is being shifted UP.
 }
 */
 
-@keyframes walkAnimation {
+@keyframes walkingAnimation {
     from {
         transform: translate3d(0%,0%,0);
     }
     to {
-        transform: -100%,0%,0;
+        transform: translate3d(-100%,0%,0)
     }
 }
 
