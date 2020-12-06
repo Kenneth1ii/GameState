@@ -6,35 +6,7 @@ var x = 0;
 var y = 0;
 var held_directions = []; // State of arrow keys held-down
 
-var speed = 1;
-
-const placeCharacter = () => {
-
-
-    var pixelSize = parseInt( getComputedStyle( document.documentElement).getPropertyValue('--pixel-size') );
-
-    const held_direction = held_directions[0]
-    if (held_direction) {
-        if (held_direction === directions.right) {x += speed;}
-        if (held_direction === directions.left) {x -=speed;}
-        if (held_direction === directions.down) {y+=speed;}
-        if (held_direction === directions.up) {y-=speed;}
-        character.setAttribute("facing", held_direction);
-    }
-    character.setAttribute("walking", held_direction ? "true": "false");
-
-    character.style.transform = `translate3d(${x*pixelSize}px, ${y*pixelSize}px, 0) `;
-
-}
-
-//setup gameloop
-const step = () => {
-    placeCharacter();
-    window.requestAnimationFrame(() => {
-        step();
-    })
-}
-step(); 
+var speed = 1;  //how fast the character moves in pixels per frame.
 
 const directions =  {
     up: "up",
@@ -44,28 +16,66 @@ const directions =  {
 }
 
 const keys = {
-    38: directions.up,
-    37: directions.left,
-    39: directions.right,
-    40: directions.down,
+    "ArrowUp": directions.up,
+    "ArrowLeft": directions.left,
+    "ArrowRight": directions.right,
+    "ArrowDown": directions.down,
 }
 
-document.addEventListener("keydown", (e) => {
-    var dir = keys[e.which];
-    if (dir && held_directions.indexOf(dir) === -1) {
-       held_directions.unshift(dir)
+
+const placeCharacter = () => {
+
+
+    var pixelSize = parseInt( getComputedStyle( document.documentElement).getPropertyValue('--pixel-size') );
+
+    const held_direction = held_directions[0] // check 0 entry.
+
+    if (held_direction) {
+        if (held_direction === directions.right) {x += speed;}
+        if (held_direction === directions.left) {x -=speed;}
+        if (held_direction === directions.down) {y+=speed;}
+        if (held_direction === directions.up) {y-=speed;}
+        character.setAttribute("facing", held_direction);  // set html attribute facing="right."
     }
- })
- 
- document.addEventListener("keyup", (e) => {
-    var dir = keys[e.which];
+    character.setAttribute("walking", held_direction ? "true": "false"); 
+    //if statement for walking attribute html characters.
+
+    var camera_left = pixelSize * 66;
+    var camera_right = pixelSize * 42;
+
+    map.style.transform = `translate3d(${-x*pixelSize+ camera_left}px, ${-y*pixelSize + camera_right}px, 0) `;
+    // Map Moves But The Camera Never Changes.
+
+    character.style.transform = `translate3d(${x*pixelSize}px, ${y*pixelSize}px, 0) `;
+
+}
+
+//setup gameloop
+const step = () => {
+    placeCharacter();   // placecharacter everytime/frames.
+    window.requestAnimationFrame(() => {    // whenerver browsers ready..
+        step(); // refire. recursion.
+    })
+}
+
+step(); 
+
+
+document.addEventListener("keydown", (e) => {
+    // Check the key if it is in keys object if undefined will not run in next , [if statements]
+    var dir = keys[e.key]; 
+    if(dir && held_directions.indexOf(dir) === -1) {    // if not found in held , put it in.
+        held_directions.unshift(dir);
+    }
+})
+
+document.addEventListener("keyup", (e) => {
+    var dir =  keys[e.key];
     var index = held_directions.indexOf(dir);
     if (index > -1) {
-       held_directions.splice(index, 1)
+        held_directions.splice(index, 1);   //splice used to remove the Key after no longer Held.
     }
- });
- 
-
+})
 
 
 
