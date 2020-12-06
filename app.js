@@ -40,6 +40,16 @@ const placeCharacter = () => {
     character.setAttribute("walking", held_direction ? "true" : "false"); 
     //if statement for walking attribute html characters.
 
+    //Limits (gives the illusion of walls)
+   var leftLimit = -8;
+   var rightLimit = (16 * 11)+8;
+   var topLimit = -8 + 32;
+   var bottomLimit = (16 * 7);
+   if (x < leftLimit) { x = leftLimit; }
+   if (x > rightLimit) { x = rightLimit; }
+   if (y < topLimit) { y = topLimit; }
+   if (y > bottomLimit) { y = bottomLimit; }
+
     var camera_left = pixelSize * 66;
     var camera_right = pixelSize * 42;
 

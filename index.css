@@ -176,3 +176,10 @@ update my pages dumb githubpages
  .dpad {
     user-select:none;
  }
+
+ .headline {
+    position:absolute;
+    top:calc(var(--pixel-size) * 2);
+    right:calc(var(--pixel-size) * 2);
+    width: calc(var(--pixel-size) * 90)
+ }
