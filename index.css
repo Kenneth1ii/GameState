@@ -9,7 +9,7 @@
         --pixel-size: 3px;
     }
 }
-/*crap github-pages*/
+/*crap github-page*/
 @media( min-width: 1000px) {
     :root {
         --pixel-size:4px;
