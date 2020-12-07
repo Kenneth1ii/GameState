@@ -23,6 +23,7 @@ html, body {
 body {
     background: var(--bg);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
@@ -182,4 +183,13 @@ update my pages dumb githubpages
     top:calc(var(--pixel-size) * 2);
     right:calc(var(--pixel-size) * 2);
     width: calc(var(--pixel-size) * 90)
+ }
+
+.linebreak {
+    width: 100%;
+}
+
+ aside{
+     margin: 0;
+     padding: 0;
  }

@@ -20,6 +20,10 @@ const keys = {
     "ArrowLeft": directions.left,
     "ArrowRight": directions.right,
     "ArrowDown": directions.down,
+    "w": directions.up,
+    "a":directions.left,
+    "d":directions.right,
+    "s": directions.down, 
 }
 
 
